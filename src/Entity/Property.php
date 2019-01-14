@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
- * @UniqueEntity("title)
+ * @UniqueEntity("title")
  */
 class Property
 {
