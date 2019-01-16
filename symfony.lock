@@ -104,6 +104,9 @@
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
+    "imagine/imagine": {
+        "version": "v0.7.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -115,6 +118,15 @@
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v2.8.0"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "523b4b0cfb88dc8637cb56e427e6be7718bdce32"
+        }
     },
     "monolog/monolog": {
         "version": "1.24.0"
