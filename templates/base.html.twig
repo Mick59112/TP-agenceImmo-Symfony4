@@ -6,13 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %} {{ encore_entry_link_tags('app') }} {% endblock %}
 </head>
 <body>
 {#NavBar#}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="{{ path('home') }}">Mon Agence</a>
+    <a class="navbar-brand" href="{{ path('home') }}" > Mon Agence </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -39,10 +40,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
         integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
-<script>
-    $('select').select2();
-</script>
-{% block javascripts %}{% endblock %}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>#}
+{#<script>#}
+    {#$('select').select2();#}
+{#</script>#}
+<script src="{{ asset('build/app.js') }}"></script>
+{% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
 </body>
 </html>
