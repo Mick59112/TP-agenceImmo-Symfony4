@@ -1,4 +1,5 @@
 
+public/media
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -20,7 +21,6 @@
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
-public/images
 
 ###> symfony/webpack-encore-pack ###
 /node_modules/
