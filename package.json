@@ -10,5 +10,9 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "babel-preset-es2017": "^6.24.1",
+        "select2": "^4.0.6-rc.1"
     }
 }

@@ -37,6 +37,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
+    .configureBabel(function(babelConfig) {
+    });
 
     // enables Sass/SCSS support
     //.enableSassLoader()
@@ -50,6 +52,8 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
-;
+var config = Encore.getWebpackConfig();
 
-module.exports = Encore.getWebpackConfig();
+config.externals.jquery = 'jQuery';
+
+module.exports = config;
