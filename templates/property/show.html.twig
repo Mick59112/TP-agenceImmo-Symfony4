@@ -16,10 +16,12 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    {% if property.filename %}
-                        <img src="{{ property.filename | imagine_filter('medium') }}" style="width: 100%;" alt="">
-                    {% else %}
+                    {% if property.pictures is empty %}
                         <img src="{{ 'empty.jpg' | imagine_filter('medium') }}" style="width: 100%;" alt="">
+                    {% else %}
+                        {% for picture in property.pictures %}
+                            <img src="{{ picture.filename | imagine_filter('medium') }}" style="width: 100%;" alt="">
+                        {% endfor %}
                     {% endif %}
                 </div>
                 <div class="col-md-4">
@@ -48,6 +50,8 @@
             </div>
         </div>
     </div>
+
+    <div class="container" id="map" style="width: 100%; height:400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
 
     <div class="container mt-4">
         <p>{{ property.description | nl2br }}</p>
@@ -83,13 +87,11 @@
             <div class="col-md-4">
                 <h2>Spécificités</h2>
                 <ul class="list-group"></ul>
-                {% for option in property.options %}
-                    <li class="list-group-item">{{ option.name }}</li>
-                {% endfor %}
+                    {% for option in property.options %}
+                        <li class="list-group-item">{{ option.name }}</li>
+                    {% endfor %}
             </div>
-
         </div>
-
     </div>
 
 {% endblock %}

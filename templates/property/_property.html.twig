@@ -3,7 +3,7 @@
         <img src="{{ property.picture.filename | imagine_filter('thumb') }}"
              style="width: 100%;" alt="">
     {% else %}
-        <img src="{{ 'images/empty.jpg' | imagine_filter('thumb') }}"
+        <img src="{{ 'empty.jpg' | imagine_filter('thumb') }}"
              style="width: 100%;" alt="">
     {% endif %}
     <div class="card-body">

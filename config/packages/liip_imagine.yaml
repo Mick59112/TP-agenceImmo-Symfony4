@@ -8,12 +8,10 @@ liip_imagine:
         web_root: "%kernel.project_dir%/public"
         cache_prefix: media/cache
 
-  default_image: /images/empty.jpg
-
   loaders:
     default:
       filesystem:
-        data_root: "%kernel.project_dir%/public/images"
+        data_root: "%kernel.project_dir%/public/media/properties"
         bundle_resources:
           enabled: true
 
