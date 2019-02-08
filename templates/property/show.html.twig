@@ -16,21 +16,26 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    {% if property.pictures is empty %}
-                        <img src="{{ 'empty.jpg' | imagine_filter('medium') }}" style="width: 100%;" alt="">
-                    {% else %}
-                        {% for picture in property.pictures %}
-                            <img src="{{ picture.filename | imagine_filter('medium') }}" style="width: 100%;" alt="">
-                        {% endfor %}
-                    {% endif %}
+                    <div data-slider>
+                        {% if property.pictures is empty %}
+                            <img src="{{ 'empty.jpg' | imagine_filter('medium') }}" style="width: 100%;" alt="">
+                        {% else %}
+                            {% for picture in property.pictures %}
+                                <img src="{{ picture.filename | imagine_filter('medium') }}" style="width: 100%;" alt="">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <h1>{{ property.title }}</h1>
                     <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
                     <div class="text-primary" style="font-size: 4rem;font-weight: bold;">{{ property.formattedPrice }}€
                     </div>
-                    <a href="" class="btn btn-primary" id="contactButton"{% if form.vars.submitted %} style="display: none;"{% endif %}>Contacter l'agence</a>
-                    <div id="contactForm" class="mt-4"{% if not form.vars.submitted %} style="display: none;"{% endif %}>
+                    <a href="" class="btn btn-primary"
+                       id="contactButton"{% if form.vars.submitted %} style="display: none;"{% endif %}>Contacter
+                        l'agence</a>
+                    <div id="contactForm"
+                         class="mt-4"{% if not form.vars.submitted %} style="display: none;"{% endif %}>
                         {{ form_start(form) }}
                         <div class="row">
                             <div class="col">{{ form_row(form.firstname) }}</div>
@@ -51,7 +56,8 @@
         </div>
     </div>
 
-    <div class="container" id="map" style="width: 100%; height:400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
+    <div class="container" id="map" style="width: 100%; height:400px" data-lat="{{ property.lat }}"
+         data-lng="{{ property.lng }}"></div>
 
     <div class="container mt-4">
         <p>{{ property.description | nl2br }}</p>
@@ -87,9 +93,9 @@
             <div class="col-md-4">
                 <h2>Spécificités</h2>
                 <ul class="list-group"></ul>
-                    {% for option in property.options %}
-                        <li class="list-group-item">{{ option.name }}</li>
-                    {% endfor %}
+                {% for option in property.options %}
+                    <li class="list-group-item">{{ option.name }}</li>
+                {% endfor %}
             </div>
         </div>
     </div>

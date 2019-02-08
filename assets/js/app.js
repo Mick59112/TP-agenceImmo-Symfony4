@@ -1,6 +1,9 @@
 
 import Places from 'places.js'
 import Map from './modules/map'
+import 'slick-carousel'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 // Affichage de la carte
 Map.init();
@@ -43,6 +46,12 @@ $contactButton.click(e => {
     $('#contactForm').slideDown();
     $contactButton.slideUp();
 
+});
+
+// Carousel
+$('[data-slider]').slick({
+    dots: true,
+    arrows: true
 });
 
 // Suppression des elements
