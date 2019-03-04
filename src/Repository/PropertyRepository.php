@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Picture;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -17,16 +19,23 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class PropertyRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(RegistryInterface $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Property::class);
+        $this->paginator = $paginator;
     }
 
     /**
      * @param PropertySearch $search
-     * @return Query
+     * @param int $page
+     * @return PaginationInterface
      */
-    public function findAllVisibleQuery(PropertySearch $search): Query
+    public function paginateAllVisible(PropertySearch $search, int $page): PaginationInterface
     {
         $query = $this->findVisibleQuery();
 
@@ -61,7 +70,22 @@ class PropertyRepository extends ServiceEntityRepository
             }
         }
 
-        return $query->getQuery();
+        $properties = $this->paginator->paginate(
+           $query->getQuery(),
+           $page,
+           12
+        );
+
+        $pictures = $this->getEntityManager()->getRepository(Picture::class)->findForProperties($properties->getItems());
+
+        /** @var  Property $property */
+        foreach ($properties as $property) {
+            if ($pictures->containsKey($property->getId())) {
+                $property->setPicture($pictures->get($property->getId()));
+            }
+        }
+
+        return $properties;
 
     }
 
@@ -86,32 +110,4 @@ class PropertyRepository extends ServiceEntityRepository
             ->where('p.sold = false');
     }
 
-    // /**
-    //  * @return Property[] Returns an array of Property objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Property
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

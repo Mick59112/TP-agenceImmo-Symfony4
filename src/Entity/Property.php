@@ -106,6 +106,11 @@ class Property
     private $updated_at;
 
     /**
+     * @var Picture|null
+     */
+    private $picture;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", orphanRemoval=true, cascade={"persist"})
      */
     private $pictures;
@@ -415,11 +420,20 @@ class Property
      */
     public function getPicture(): ?Picture
     {
-        if ($this->pictures->isEmpty()) {
-            return null;
-        }
-        return $this->pictures->first();
+        return $this->picture;
     }
+
+    /**
+     * @param Picture|null $picture
+     * @return Property
+     */
+    public function setPicture(?Picture $picture): self
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
 
     public function getLat(): ?float
     {
